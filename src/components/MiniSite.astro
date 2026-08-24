@@ -1,0 +1,109 @@
+---
+interface Props {
+  theme: string;
+  compact?: boolean;
+}
+
+const { theme, compact = false } = Astro.props;
+const height = compact ? "h-52" : "h-64 md:h-72";
+---
+
+{
+  theme === "services" && (
+    <div class:list={[height, "overflow-hidden bg-[#10211c] p-5 text-[#d7efe6]"]} aria-hidden="true">
+      <div class="flex items-center justify-between text-[0.65rem] tracking-[0.16em] uppercase opacity-70">
+        <span>Northline Advisory</span>
+        <span class="rounded-full bg-[#2dd4bf] px-2 py-0.5 text-[0.6rem] font-semibold tracking-normal text-[#10211c]">
+          Book a call
+        </span>
+      </div>
+      <p class="mt-8 font-display text-2xl leading-tight md:text-3xl">Clarity for operators who have outgrown guesswork.</p>
+      <p class="mt-3 max-w-[16rem] text-[0.7rem] leading-5 text-[#d7efe6]/60">Strategy, systems, and a partner who stays through the hard quarter.</p>
+      <div class="mt-6 grid grid-cols-3 gap-2">
+        {["Scope", "Cadence", "Proof"].map((item) => (
+          <div class="rounded-lg bg-white/6 px-2 py-3 text-center text-[0.65rem]">{item}</div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+{
+  theme === "retail" && (
+    <div class:list={[height, "overflow-hidden bg-[#2c1712] p-5 text-[#f3ddd0]"]} aria-hidden="true">
+      <div class="flex items-center justify-between text-[0.65rem] tracking-[0.16em] uppercase opacity-70">
+        <span>Atelier No. 4</span>
+        <span>Shop</span>
+      </div>
+      <div class="mt-6 grid grid-cols-[1.2fr_0.8fr] gap-3">
+        <div>
+          <p class="font-display text-2xl leading-tight">Objects made to be kept.</p>
+          <p class="mt-2 text-[0.7rem] leading-5 text-[#f3ddd0]/60">A seasonal edit. Quiet luxury. No leftover inventory energy.</p>
+        </div>
+        <div class="rounded-xl bg-linear-to-br from-[#c47a58] to-[#6b2e1d]"></div>
+      </div>
+      <div class="mt-4 flex gap-2">
+        <span class="h-16 flex-1 rounded-lg bg-[#8b3a22]/80"></span>
+        <span class="h-16 flex-1 rounded-lg bg-[#d9a48c]/70"></span>
+        <span class="h-16 flex-1 rounded-lg bg-[#4a2218]"></span>
+      </div>
+    </div>
+  )
+}
+
+{
+  theme === "saas" && (
+    <div class:list={[height, "overflow-hidden bg-[#0f1724] p-5 text-[#d7e6ff]"]} aria-hidden="true">
+      <div class="flex items-center justify-between text-[0.65rem] tracking-[0.14em] uppercase opacity-60">
+        <span>Ledgerflow</span>
+        <span class="rounded-full bg-[#3b82f6] px-2 py-0.5 text-[0.6rem] font-semibold tracking-normal text-white">
+          Get a demo
+        </span>
+      </div>
+      <p class="mt-7 font-display text-xl leading-tight">Revenue ops, without the spreadsheet archaeology.</p>
+      <div class="mt-5 rounded-xl border border-white/10 bg-white/5 p-3">
+        <div class="h-2 w-2/3 rounded-full bg-[#60a5fa]/80"></div>
+        <div class="mt-2 h-2 w-1/2 rounded-full bg-white/15"></div>
+        <div class="mt-4 grid grid-cols-3 gap-2">
+          <span class="h-10 rounded-md bg-[#1e3a5f]"></span>
+          <span class="h-10 rounded-md bg-[#1e293b]"></span>
+          <span class="h-10 rounded-md bg-[#1e3a5f]/70"></span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+{
+  theme === "hospitality" && (
+    <div class:list={[height, "relative overflow-hidden bg-[#241c14] p-5 text-[#efe6d6]"]} aria-hidden="true">
+      <div class="absolute -right-6 -top-8 h-28 w-28 rounded-full bg-[#d4a373]/40 blur-2xl"></div>
+      <div class="relative flex items-center justify-between text-[0.65rem] tracking-[0.16em] uppercase opacity-70">
+        <span>Hearth &amp; Hollow</span>
+        <span>Reserve</span>
+      </div>
+      <p class="relative mt-10 font-display text-2xl leading-tight">Dinner that feels like a destination.</p>
+      <p class="relative mt-2 text-[0.7rem] text-[#efe6d6]/55">Friday tasting · courtyard seats · open fire</p>
+      <div class="relative mt-6 inline-flex rounded-full border border-[#d4a373]/50 px-3 py-1 text-[0.65rem] tracking-wide uppercase">
+        Book a table
+      </div>
+    </div>
+  )
+}
+
+{
+  theme === "studio" && (
+    <div class:list={[height, "overflow-hidden bg-[#ece7dc] p-5 text-[#1a1916]"]} aria-hidden="true">
+      <div class="flex items-center justify-between text-[0.65rem] tracking-[0.16em] uppercase opacity-60">
+        <span>Fieldwork</span>
+        <span>Selected</span>
+      </div>
+      <p class="mt-6 font-display text-xl leading-tight">A studio page that edits, instead of dumping the archive.</p>
+      <div class="mt-5 grid grid-cols-3 gap-2">
+        <span class="h-20 rounded-md bg-[#1a1916]"></span>
+        <span class="h-20 rounded-md bg-[#c9c2b2]"></span>
+        <span class="h-20 rounded-md bg-[#7d786c]"></span>
+      </div>
+    </div>
+  )
+}

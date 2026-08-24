@@ -1,275 +1,725 @@
 ---
-import "../styles/global.css";
+import Base from "../layouts/Base.astro";
+import MiniSite from "../components/MiniSite.astro";
 
-const services = [
+const nav = [
+  { href: "#about", label: "About" },
+  { href: "#packages", label: "Packages" },
+  { href: "#work", label: "Work" },
+  { href: "#process", label: "Process" },
+  { href: "#contact", label: "Contact" },
+];
+
+const stats = [
+  { value: "20+", label: "Years shipping software" },
+  { value: "100%", label: "Custom-coded sites" },
+  { value: "AWS / Azure", label: "Production-ready hosting" },
+];
+
+const marquee = [
+  "Custom Design",
+  "Mobile Responsive",
+  "Technical SEO",
+  "E-Commerce",
+  "Brand Identity",
+  "Core Web Vitals",
+  "Cloud Deploy",
+  ".NET Integration",
+  "Lead Capture",
+  "Ongoing Support",
+];
+
+const pillars = [
   {
-    title: "Business Website Design",
-    description:
-      "Conversion-focused website design with modern UX patterns, mobile-first layouts, and clear brand messaging.",
+    title: "Designed with purpose",
+    body: "Every layout, headline, and call to action is built around how your buyers actually decide — not around a leftover theme.",
   },
   {
-    title: "Custom Web Development",
-    description:
-      "End-to-end implementation using scalable front-end architecture and clean APIs, with strong .NET integration options.",
+    title: "Engineered like software",
+    body: "Twenty years in .NET and front-end production work means clean code, fast pages, and a site you can keep evolving.",
   },
   {
-    title: "Performance and SEO Optimization",
-    description:
-      "Core Web Vitals tuning, semantic markup, technical SEO, and analytics foundations to support long-term growth.",
+    title: "Measured by inquiries",
+    body: "Beautiful is the baseline. The job is qualified leads, clearer offers, and a page that does sales work while you sleep.",
+  },
+];
+
+const packages = [
+  {
+    id: "core",
+    name: "Core",
+    kicker: "A sharp first presence",
+    price: "$500",
+    hosting: "+ $50/mo hosting",
+    featured: false,
+    features: [
+      { label: "Up to 3 custom pages", included: true },
+      { label: "Mobile-first responsive design", included: true },
+      { label: "Contact form integration", included: true },
+      { label: "Technical SEO foundation", included: true },
+      { label: "Google Analytics", included: true },
+      { label: "You own the source code", included: true },
+      { label: "E-commerce functionality", included: false },
+      { label: "Custom motion & interactions", included: false },
+    ],
   },
   {
-    title: "Ongoing Technical Partnership",
-    description:
-      "Roadmapping, maintenance, and incremental releases so your site keeps improving as your business evolves.",
+    id: "growth",
+    name: "Growth",
+    kicker: "Built to keep winning work",
+    price: "$900",
+    hosting: "+ $60/mo hosting",
+    featured: true,
+    badge: "Most chosen",
+    features: [
+      { label: "Up to 6 custom pages", included: true },
+      { label: "Mobile-first responsive design", included: true },
+      { label: "Contact and lead-capture forms", included: true },
+      { label: "Advanced SEO optimization", included: true },
+      { label: "Analytics + Search Console", included: true },
+      { label: "Custom motion & interactions", included: true },
+      { label: "Blog or project gallery", included: true },
+      { label: "Priority support", included: true },
+    ],
+  },
+  {
+    id: "flagship",
+    name: "Flagship",
+    kicker: "The complete engagement",
+    price: "$1,500",
+    hosting: "+ $75/mo hosting",
+    featured: false,
+    features: [
+      { label: "Unlimited custom pages", included: true },
+      { label: "Mobile-first responsive design", included: true },
+      { label: "Full lead-generation suite", included: true },
+      { label: "Premium SEO & performance", included: true },
+      { label: "E-commerce ready", included: true },
+      { label: "Advanced motion & effects", included: true },
+      { label: "Brand identity consultation", included: true },
+      { label: ".NET / API + cloud deploy", included: true },
+    ],
+  },
+];
+
+const studies = [
+  {
+    industry: "Professional services",
+    title: "Authority-first service site",
+    note: "Trust, proof, and a clear next step for high-consideration buyers.",
+    theme: "services",
+    size: "lg",
+  },
+  {
+    industry: "Specialty retail",
+    title: "Editorial product story",
+    note: "Merchandise presented like a brand film, not a catalog dump.",
+    theme: "retail",
+    size: "lg",
+  },
+  {
+    industry: "B2B software",
+    title: "Product narrative, not feature soup",
+    note: "A homepage that explains the job-to-be-done before it sells seats.",
+    theme: "saas",
+    size: "sm",
+  },
+  {
+    industry: "Hospitality",
+    title: "Atmosphere you can book",
+    note: "Mood, menu, and reservation intent on a single confident path.",
+    theme: "hospitality",
+    size: "sm",
+  },
+  {
+    industry: "Creative practice",
+    title: "Portfolio that edits itself",
+    note: "Selected work, not everything — with room for the craft to breathe.",
+    theme: "studio",
+    size: "sm",
   },
 ];
 
 const process = [
   {
-    phase: "01. Discovery",
-    detail:
-      "Clarify goals, audience, offer positioning, and technical requirements before writing implementation plans.",
+    num: "01",
+    title: "Align",
+    body: "A working session on offer, audience, and what “done” looks like. We leave with scope, not a stack of unanswered forms.",
   },
   {
-    phase: "02. Design and Content",
-    detail:
-      "Create wireframes and polished UI direction with real business copy, then validate messaging against buyer intent.",
+    num: "02",
+    title: "Architect",
+    body: "Information architecture, copy direction, and visual system — designed against your real brand, not a moodboard collage.",
   },
   {
-    phase: "03. Build and Integrate",
-    detail:
-      "Develop the site with production-quality code, connect forms and analytics, and prepare deployment pipelines.",
+    num: "03",
+    title: "Build",
+    body: "Custom front-end, forms, analytics, and performance work. You review a live preview and we refine until it feels inevitable.",
   },
   {
-    phase: "04. Launch and Iterate",
-    detail:
-      "Ship to cloud infrastructure, monitor outcomes, and improve based on conversion data and customer feedback.",
+    num: "04",
+    title: "Ship",
+    body: "Domain, hosting, and go-live on infrastructure you control. Then we stay close through the first weeks of real traffic.",
   },
 ];
 
 const outcomes = [
-  "20+ years in .NET and front-end engineering",
-  "Production-ready delivery with modern tooling",
-  "Clear path to deploy on AWS or Azure",
+  {
+    quote:
+      "The site stopped being a brochure and started qualifying people before they ever called.",
+    role: "What a service business needs",
+  },
+  {
+    quote:
+      "Every detail felt considered — and the technical side did not become someone else’s problem later.",
+    role: "What an operator notices",
+  },
+  {
+    quote:
+      "We look like the premium option in a market still running on templates.",
+    role: "What buyers feel first",
+  },
 ];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-    <meta
-      name="description"
-      content="OMNIV3 Consulting builds high-performing websites through modern web development and web design."
-    />
-    <title>OMNIV3 Consulting</title>
-  </head>
-  <body>
-    <main class="min-h-screen bg-slate-50 text-slate-900">
-      <div class="mx-auto flex w-full max-w-6xl flex-col px-6 py-12 md:px-10 md:py-16">
-        <header class="mb-16 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-12">
-          <div class="mb-6 flex flex-wrap gap-3">
-            <span class="rounded-full bg-slate-900 px-4 py-1.5 text-xs font-semibold tracking-wide text-white">
-              OMNIV3 Consulting
-            </span>
-            <span class="rounded-full bg-slate-100 px-4 py-1.5 text-xs font-semibold tracking-wide text-slate-700">
-              Web Design
-            </span>
-            <span class="rounded-full bg-slate-100 px-4 py-1.5 text-xs font-semibold tracking-wide text-slate-700">
-              Web Development
-            </span>
-            <span class="rounded-full bg-slate-100 px-4 py-1.5 text-xs font-semibold tracking-wide text-slate-700">
-              .NET Expertise
-            </span>
-          </div>
+<Base>
+  <header
+    class="nav-blur fixed inset-x-0 top-0 z-50 border-b border-[var(--color-line)]"
+  >
+    <div class="mx-auto flex h-[4.25rem] w-full max-w-6xl items-center justify-between px-5 md:px-8">
+      <a href="#top" class="flex items-center gap-2.5" aria-label="OMNIV3 Consulting home">
+        <span class="relative grid h-8 w-8 place-items-center">
+          <span class="absolute inset-0 rounded-full border border-accent/70"></span>
+          <span class="absolute inset-1.5 rounded-full border border-accent/80"></span>
+          <span class="h-1.5 w-1.5 rounded-full bg-accent"></span>
+        </span>
+        <span class="text-[0.95rem] font-semibold tracking-tight">
+          OMNIV3<span class="text-accent">.</span>
+        </span>
+      </a>
 
-          <h1 class="mb-4 max-w-3xl text-4xl font-semibold tracking-tight md:text-5xl">
-            OMNIV3 Consulting builds high-performing websites that help businesses stand out, earn trust, and generate qualified leads.
-          </h1>
-          <p class="max-w-3xl text-lg leading-8 text-slate-600">
-            Backed by 20+ years of engineering experience in .NET and front-end development, OMNIV3 Consulting delivers modern web design and custom development with business results in mind.
+      <nav class="hidden items-center gap-8 text-sm text-cream/70 md:flex" aria-label="Primary">
+        {
+          nav.map((item) => (
+            <a class="transition hover:text-cream" href={item.href}>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a
+          href="#contact"
+          class="hidden rounded-full border border-accent/70 px-4 py-2 text-xs font-semibold tracking-[0.14em] text-accent uppercase transition hover:bg-accent hover:text-ink sm:inline-flex"
+        >
+          Start a project
+        </a>
+        <button
+          id="menu-toggle"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-cream md:hidden"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+          aria-label="Open menu"
+        >
+          <span class="sr-only">Menu</span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-nav" class="hidden border-t border-white/10 px-5 py-4 md:hidden">
+      <nav class="flex flex-col gap-3 text-sm" aria-label="Mobile">
+        {
+          nav.map((item) => (
+            <a class="rounded-lg px-2 py-2 text-cream/80 hover:bg-white/5 hover:text-cream" href={item.href}>
+              {item.label}
+            </a>
+          ))
+        }
+        <a
+          href="#contact"
+          class="mt-1 rounded-full border border-accent/70 px-4 py-2 text-center text-xs font-semibold tracking-[0.14em] text-accent uppercase"
+        >
+          Start a project
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="top" class="grid-fade relative overflow-hidden pt-28 md:pt-32">
+      <div class="omni-rings" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="relative mx-auto flex min-h-[78vh] w-full max-w-6xl flex-col justify-center px-5 pb-20 md:px-8 md:pb-24">
+        <p class="reveal text-xs font-semibold tracking-[0.22em] text-accent uppercase">
+          Custom web design studio
+        </p>
+        <h1 class="reveal reveal-delay-1 mt-5 max-w-4xl text-5xl leading-[1.05] font-medium tracking-tight text-cream sm:text-6xl md:text-7xl">
+          Websites <span class="italic-accent text-accent">engineered</span> to convert.
+        </h1>
+        <p class="reveal reveal-delay-2 mt-6 max-w-2xl text-lg leading-8 text-cream/70">
+          OMNIV3 Consulting builds custom, high-performance sites for businesses that refuse to look interchangeable. No templates. No page builders. Precision front-end work, backed by two decades of production engineering.
+        </p>
+        <div class="reveal reveal-delay-3 mt-9 flex flex-wrap gap-3">
+          <a
+            href="#packages"
+            class="inline-flex items-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white"
+          >
+            View packages
+          </a>
+          <a
+            href="#work"
+            class="inline-flex items-center rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-cream transition hover:border-white/40"
+          >
+            See the work
+          </a>
+        </div>
+      </div>
+
+      <div class="relative border-t border-white/10">
+        <div class="mx-auto grid w-full max-w-6xl gap-8 px-5 py-8 md:grid-cols-3 md:px-8">
+          {
+            stats.map((stat) => (
+              <div>
+                <p class="text-3xl font-semibold tracking-tight text-cream md:text-4xl">{stat.value}</p>
+                <p class="mt-1 text-sm text-cream/55">{stat.label}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <div class="border-y border-white/10 bg-ink-2 py-4">
+      <div class="marquee">
+        <div class="marquee-track text-sm tracking-[0.18em] text-cream/50 uppercase">
+          {[...marquee, ...marquee].map((item) => (
+            <span class="flex items-center gap-2.5">
+              <span class="h-1 w-1 rounded-full bg-accent"></span>
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <section id="about" class="section-anchor bg-paper text-ink">
+      <div class="mx-auto grid w-full max-w-6xl gap-12 px-5 py-20 md:grid-cols-[1.1fr_0.9fr] md:px-8 md:py-28">
+        <div>
+          <p class="text-xs font-semibold tracking-[0.2em] text-accent-deep uppercase">Who we are</p>
+          <h2 class="mt-4 text-4xl leading-tight font-medium tracking-tight md:text-5xl">
+            Craft that holds up
+            <span class="italic-accent text-accent-deep"> in production.</span>
+          </h2>
+          <p class="mt-6 max-w-xl text-lg leading-8 text-stone">
+            OMNIV3 is a boutique studio for companies that want a site as considered as the business behind it. We start from a blank file, learn how you sell, and design a digital presence that can carry the conversation.
           </p>
+          <p class="mt-4 max-w-xl text-lg leading-8 text-stone">
+            The difference is the engineering. Pages are written, not dragged together. You own the code. Hosting lives on serious infrastructure. When you need more than a brochure — APIs, .NET, analytics that actually mean something — the same team stays on the work.
+          </p>
+        </div>
+        <div class="grid gap-4">
+          {
+            pillars.map((pillar) => (
+              <article class="rounded-2xl border border-ink/8 bg-cream p-6">
+                <h3 class="text-lg font-semibold">{pillar.title}</h3>
+                <p class="mt-2 text-[0.95rem] leading-7 text-stone">{pillar.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
 
-          <div class="mt-8 flex flex-wrap gap-4">
-            <a
-              href="#contact"
-              class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700"
-            >
-              Book a strategy call
-            </a>
-            <a
-              href="#services"
-              class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
-            >
-              Explore services
-            </a>
+    <section id="packages" class="section-anchor bg-ink">
+      <div class="mx-auto w-full max-w-6xl px-5 py-20 md:px-8 md:py-28">
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="text-xs font-semibold tracking-[0.2em] text-accent uppercase">Pricing</p>
+          <h2 class="mt-4 text-4xl leading-tight font-medium tracking-tight md:text-5xl">
+            Choose the right
+            <span class="italic-accent text-accent"> build.</span>
+          </h2>
+          <p class="mt-4 text-lg leading-8 text-cream/65">
+            Every package is fully custom — designed and coded for you. Pick the depth that matches where the business is now.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-5 lg:grid-cols-3">
+          {
+            packages.map((pkg) => (
+              <article
+                class:list={[
+                  "flex flex-col rounded-3xl border p-7",
+                  pkg.featured
+                    ? "border-accent/50 bg-ink-2 shadow-[0_0_0_1px_rgba(45,212,191,0.18),0_24px_80px_rgba(45,212,191,0.08)]"
+                    : "border-white/10 bg-ink-2/70",
+                ]}
+              >
+                {pkg.featured && (
+                  <p class="mb-4 w-fit rounded-full bg-accent px-3 py-1 text-[0.7rem] font-semibold tracking-[0.14em] text-ink uppercase">
+                    {pkg.badge}
+                  </p>
+                )}
+                <p class="text-sm text-cream/50">{pkg.kicker}</p>
+                <h3 class="mt-1 text-2xl font-semibold">{pkg.name}</h3>
+                <p class="mt-5 flex items-end gap-1">
+                  <span class="text-5xl font-semibold tracking-tight">{pkg.price}</span>
+                </p>
+                <p class="mt-1 text-sm text-cream/50">{pkg.hosting}</p>
+                <p class="mt-1 text-xs text-cream/35">One-time investment</p>
+                <ul class="mt-8 flex flex-1 flex-col gap-3 text-sm">
+                  {pkg.features.map((feature) => (
+                    <li
+                      class:list={[
+                        "flex items-start gap-2.5",
+                        feature.included ? "text-cream/85" : "text-cream/30 line-through",
+                      ]}
+                    >
+                      <span class:list={["mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full", feature.included ? "bg-accent" : "bg-white/20"]} />
+                      {feature.label}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#contact"
+                  data-package={pkg.id}
+                  class:list={[
+                    "mt-8 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition",
+                    pkg.featured
+                      ? "bg-accent text-ink hover:bg-white"
+                      : "border border-white/15 text-cream hover:border-accent hover:text-accent",
+                  ]}
+                >
+                  Get started
+                </a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section-anchor bg-paper text-ink">
+      <div class="mx-auto w-full max-w-6xl px-5 py-20 md:px-8 md:py-28">
+        <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <p class="text-xs font-semibold tracking-[0.2em] text-accent-deep uppercase">Selected directions</p>
+            <h2 class="mt-4 text-4xl leading-tight font-medium tracking-tight md:text-5xl">
+              Built to
+              <span class="italic-accent text-accent-deep"> look inevitable.</span>
+            </h2>
           </div>
-        </header>
+          <p class="max-w-md text-base leading-7 text-stone">
+            Original design studies for the kinds of businesses we take on. This is the caliber — not a theme gallery, and not work borrowed from someone else.
+          </p>
+        </div>
 
-        <section id="services" class="mb-14">
-          <div class="mb-6">
-            <h2 class="text-2xl font-semibold md:text-3xl">Services designed for growth</h2>
-            <p class="mt-2 max-w-3xl text-slate-600">
-              Position your company as a technical partner that can design, build, and scale business-critical websites.
+        <div class="mt-12 grid gap-5 md:grid-cols-2">
+          {
+            studies.slice(0, 2).map((study) => (
+              <article>
+                <div class="browser-chrome">
+                  <div class="browser-bar">
+                    <span class="browser-dot" />
+                    <span class="browser-dot" />
+                    <span class="browser-dot" />
+                  </div>
+                  <MiniSite theme={study.theme} compact={false} />
+                </div>
+                <p class="mt-4 text-xs font-semibold tracking-[0.16em] text-accent-deep uppercase">{study.industry}</p>
+                <h3 class="mt-1 text-xl font-semibold">{study.title}</h3>
+                <p class="mt-1 text-sm leading-6 text-stone">{study.note}</p>
+              </article>
+            ))
+          }
+        </div>
+        <div class="mt-5 grid gap-5 md:grid-cols-3">
+          {
+            studies.slice(2).map((study) => (
+              <article>
+                <div class="browser-chrome">
+                  <div class="browser-bar">
+                    <span class="browser-dot" />
+                    <span class="browser-dot" />
+                    <span class="browser-dot" />
+                  </div>
+                  <MiniSite theme={study.theme} compact={true} />
+                </div>
+                <p class="mt-4 text-xs font-semibold tracking-[0.16em] text-accent-deep uppercase">{study.industry}</p>
+                <h3 class="mt-1 text-lg font-semibold">{study.title}</h3>
+                <p class="mt-1 text-sm leading-6 text-stone">{study.note}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-paper-2 text-ink">
+      <div class="mx-auto w-full max-w-6xl px-5 py-20 md:px-8 md:py-24">
+        <p class="text-xs font-semibold tracking-[0.2em] text-accent-deep uppercase">What changes</p>
+        <h2 class="mt-4 max-w-3xl text-4xl leading-tight font-medium tracking-tight md:text-5xl">
+          A site should feel like the
+          <span class="italic-accent text-accent-deep"> premium option.</span>
+        </h2>
+        <div class="mt-12 grid gap-5 md:grid-cols-3">
+          {
+            outcomes.map((item) => (
+              <blockquote class="rounded-3xl border border-ink/8 bg-cream p-7">
+                <p class="text-lg leading-8 text-ink/90">“{item.quote}”</p>
+                <footer class="mt-6 text-sm font-medium text-stone">{item.role}</footer>
+              </blockquote>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="section-anchor bg-ink">
+      <div class="mx-auto w-full max-w-6xl px-5 py-20 md:px-8 md:py-28">
+        <div class="max-w-2xl">
+          <p class="text-xs font-semibold tracking-[0.2em] text-accent uppercase">How it works</p>
+          <h2 class="mt-4 text-4xl leading-tight font-medium tracking-tight md:text-5xl">
+            From brief
+            <span class="italic-accent text-accent"> to live.</span>
+          </h2>
+          <p class="mt-4 text-lg leading-8 text-cream/65">
+            A short, adult process. You stay in the loop without being asked to project-manage a committee.
+          </p>
+        </div>
+        <div class="mt-14 grid gap-4 md:grid-cols-2">
+          {
+            process.map((step) => (
+              <article class="rounded-3xl border border-white/10 bg-ink-2 p-7">
+                <p class="text-sm font-semibold tracking-[0.18em] text-accent">{step.num}</p>
+                <h3 class="mt-3 text-2xl font-semibold">{step.title}</h3>
+                <p class="mt-3 text-base leading-7 text-cream/65">{step.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-anchor bg-ink">
+      <div class="mx-auto grid w-full max-w-6xl gap-12 border-t border-white/10 px-5 py-20 md:grid-cols-[1fr_1.1fr] md:px-8 md:py-28">
+        <div>
+          <p class="text-xs font-semibold tracking-[0.2em] text-accent uppercase">Get in touch</p>
+          <h2 class="mt-4 text-4xl leading-tight font-medium tracking-tight md:text-5xl">
+            Ready when
+            <span class="italic-accent text-accent"> you are.</span>
+          </h2>
+          <p class="mt-5 max-w-md text-lg leading-8 text-cream/65">
+            Tell us about the business and the outcome you need. We’ll reply within 24 hours with a clear plan — no pitch theater.
+          </p>
+          <dl class="mt-10 space-y-4 text-sm">
+            <div>
+              <dt class="text-cream/40">Response</dt>
+              <dd class="mt-1 text-cream">Within one business day</dd>
+            </div>
+            <div>
+              <dt class="text-cream/40">Working style</dt>
+              <dd class="mt-1 text-cream">Remote-first · US time zones</dd>
+            </div>
+            <div>
+              <dt class="text-cream/40">Best for</dt>
+              <dd class="mt-1 text-cream">Operators who want custom work, not a rented theme</dd>
+            </div>
+          </dl>
+        </div>
+
+        <form id="contact-form" class="rounded-3xl border border-white/10 bg-ink-2 p-6 md:p-8">
+          <div class="grid gap-4 sm:grid-cols-2">
+            <label class="block text-sm">
+              <span class="mb-2 block text-cream/70">Name</span>
+              <input class="field" required name="name" type="text" autocomplete="name" placeholder="Alex Rivera" />
+            </label>
+            <label class="block text-sm">
+              <span class="mb-2 block text-cream/70">Email</span>
+              <input class="field" required name="email" type="email" autocomplete="email" placeholder="you@company.com" />
+            </label>
+          </div>
+          <label class="mt-4 block text-sm">
+            <span class="mb-2 block text-cream/70">Company</span>
+            <input class="field" name="company" type="text" autocomplete="organization" placeholder="Optional" />
+          </label>
+          <label class="mt-4 block text-sm">
+            <span class="mb-2 block text-cream/70">Package</span>
+            <select id="package-select" class="field" name="package">
+              <option value="unsure">Not sure yet — let’s talk</option>
+              <option value="core">Core — $500 + $50/mo hosting</option>
+              <option value="growth">Growth — $900 + $60/mo hosting</option>
+              <option value="flagship">Flagship — $1,500 + $75/mo hosting</option>
+            </select>
+          </label>
+          <label class="mt-4 block text-sm">
+            <span class="mb-2 block text-cream/70">Project details</span>
+            <textarea
+              class="field min-h-32"
+              required
+              name="projectDetails"
+              minlength="30"
+              placeholder="What you sell, who it’s for, and when you want to be live (30+ characters)."
+            ></textarea>
+          </label>
+          <div class="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <button
+              id="contact-submit"
+              class="inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold text-ink transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+              type="submit"
+            >
+              Send message
+            </button>
+            <p id="form-status" class="text-sm leading-6 text-cream/50">
+              We’ll use this to scope the right build. No obligation.
             </p>
           </div>
-          <div class="grid gap-4 md:grid-cols-2">
-            {
-              services.map((service) => (
-                <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <h3 class="text-xl font-semibold text-slate-900">{service.title}</h3>
-                  <p class="mt-2 text-base leading-7 text-slate-600">{service.description}</p>
-                </article>
-              ))
-            }
-          </div>
-        </section>
-
-        <section class="mb-14 rounded-2xl border border-slate-200 bg-white p-6 md:p-8">
-          <h2 class="text-2xl font-semibold md:text-3xl">Why clients choose OMNIV3 Consulting</h2>
-          <div class="my-6 h-px w-full bg-slate-200"></div>
-          <div class="grid gap-4 md:grid-cols-3">
-            {
-              outcomes.map((item) => (
-                <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                  <p class="text-sm leading-7 text-slate-700 md:text-base">{item}</p>
-                </article>
-              ))
-            }
-          </div>
-        </section>
-
-        <section class="mb-14">
-          <h2 class="mb-6 text-2xl font-semibold md:text-3xl">Delivery process</h2>
-          <div class="grid gap-4 md:grid-cols-2">
-            {
-              process.map((step) => (
-                <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                  <h3 class="text-lg font-semibold text-slate-900">{step.phase}</h3>
-                  <p class="mt-2 text-base leading-7 text-slate-600">{step.detail}</p>
-                </article>
-              ))
-            }
-          </div>
-        </section>
-
-        <section id="contact" class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-10">
-          <h2 class="text-2xl font-semibold md:text-3xl">Start your first client-ready website now</h2>
-          <p class="mt-2 max-w-3xl text-slate-600">
-            Send your business goals and project scope. The contact flow is already wired so you can demonstrate a working lead pipeline from day one.
-          </p>
-
-          <div class="mt-8 grid gap-8 md:grid-cols-[2fr_1fr]">
-            <form id="contact-form" class="space-y-4">
-              <div class="grid gap-4 sm:grid-cols-2">
-                <input
-                  required
-                  name="name"
-                  type="text"
-                  placeholder="Your name"
-                  class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"
-                />
-                <input
-                  required
-                  name="email"
-                  type="email"
-                  placeholder="Email address"
-                  class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"
-                />
-              </div>
-              <input
-                name="company"
-                type="text"
-                placeholder="Company name (optional)"
-                class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"
-              />
-              <textarea
-                required
-                name="projectDetails"
-                minlength="30"
-                placeholder="Project goals, target audience, and timeline (minimum 30 characters)"
-                class="min-h-32 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"
-              ></textarea>
-              <button
-                id="contact-submit"
-                type="submit"
-                class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                Send project brief
-              </button>
-            </form>
-
-            <aside class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-              <p class="mb-2 text-sm font-medium uppercase tracking-wide text-slate-500">Submission status</p>
-              <p id="form-status" class="text-sm leading-7 text-slate-600">
-                Tell us about your project and timeline to receive a scoped recommendation.
-              </p>
-              <p id="form-empty-hint" class="mt-4 text-xs text-slate-500">
-                Empty state: submit your first inquiry to test the full flow.
-              </p>
-            </aside>
-          </div>
-        </section>
+        </form>
       </div>
-    </main>
+    </section>
+  </main>
 
-    <script is:inline>
-      const form = document.querySelector("#contact-form");
-      const submitButton = document.querySelector("#contact-submit");
-      const statusMessage = document.querySelector("#form-status");
-      const emptyHint = document.querySelector("#form-empty-hint");
+  <footer class="border-t border-white/10 bg-ink">
+    <div class="mx-auto grid w-full max-w-6xl gap-12 px-5 py-14 md:grid-cols-4 md:px-8">
+      <div class="md:col-span-1">
+        <p class="text-[0.95rem] font-semibold tracking-tight">
+          OMNIV3<span class="text-accent">.</span>
+        </p>
+        <p class="mt-3 max-w-xs text-sm leading-6 text-cream/50">
+          Custom websites engineered to convert — designed, coded, and shipped as real software.
+        </p>
+      </div>
+      <div>
+        <p class="text-xs font-semibold tracking-[0.16em] text-cream/40 uppercase">Services</p>
+        <ul class="mt-4 space-y-2 text-sm text-cream/70">
+          <li>Custom web design</li>
+          <li>Custom development</li>
+          <li>SEO & performance</li>
+          <li>E-commerce</li>
+          <li>.NET & cloud integration</li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-semibold tracking-[0.16em] text-cream/40 uppercase">Studio</p>
+        <ul class="mt-4 space-y-2 text-sm text-cream/70">
+          <li><a class="hover:text-accent" href="#about">About</a></li>
+          <li><a class="hover:text-accent" href="#work">Work</a></li>
+          <li><a class="hover:text-accent" href="#process">Process</a></li>
+          <li><a class="hover:text-accent" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-semibold tracking-[0.16em] text-cream/40 uppercase">Packages</p>
+        <ul class="mt-4 space-y-2 text-sm text-cream/70">
+          <li><a class="hover:text-accent" href="#contact" data-package="core">Core — $500 + $50/mo</a></li>
+          <li><a class="hover:text-accent" href="#contact" data-package="growth">Growth — $900 + $60/mo</a></li>
+          <li><a class="hover:text-accent" href="#contact" data-package="flagship">Flagship — $1,500 + $75/mo</a></li>
+          <li><a class="hover:text-accent" href="#contact">Custom quote</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <p class="mx-auto w-full max-w-6xl px-5 py-6 text-xs text-cream/35 md:px-8">
+        © {new Date().getFullYear()} OMNIV3 Consulting. All rights reserved.
+      </p>
+    </div>
+  </footer>
 
-      if (form && submitButton && statusMessage && emptyHint) {
-        form.addEventListener("submit", async (event) => {
-          event.preventDefault();
+  <style>
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
 
-          const formData = new FormData(form);
-          const payload = {
-            name: String(formData.get("name") ?? "").trim(),
-            email: String(formData.get("email") ?? "").trim(),
-            company: String(formData.get("company") ?? "").trim(),
-            projectDetails: String(formData.get("projectDetails") ?? "").trim(),
-          };
+  <script>
+    const toggle = document.querySelector("#menu-toggle");
+    const mobileNav = document.querySelector("#mobile-nav");
+    const form = document.querySelector("#contact-form");
+    const submitButton = document.querySelector("#contact-submit");
+    const statusMessage = document.querySelector("#form-status");
+    const packageSelect = document.querySelector("#package-select");
 
-          statusMessage.textContent = "Sending your project details...";
-          statusMessage.className = "text-sm leading-7 text-slate-600";
-          emptyHint.classList.add("hidden");
-          submitButton.setAttribute("disabled", "true");
-          submitButton.textContent = "Sending...";
+    const setPackage = (value: string) => {
+      if (!(packageSelect instanceof HTMLSelectElement)) return;
+      const allowed = ["core", "growth", "flagship", "unsure"];
+      if (allowed.includes(value)) packageSelect.value = value;
+    };
 
-          try {
-            const response = await fetch("/api/contact", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(payload),
-            });
+    document.querySelectorAll("[data-package]").forEach((el) => {
+      el.addEventListener("click", () => {
+        const value = el.getAttribute("data-package");
+        if (value) setPackage(value);
+      });
+    });
 
-            const data = await response.json();
+    if (toggle instanceof HTMLButtonElement && mobileNav instanceof HTMLElement) {
+      toggle.addEventListener("click", () => {
+        const open = !mobileNav.classList.contains("hidden");
+        mobileNav.classList.toggle("hidden", open);
+        toggle.setAttribute("aria-expanded", String(!open));
+        toggle.setAttribute("aria-label", open ? "Open menu" : "Close menu");
+      });
 
-            if (!response.ok) {
-              throw new Error(data.message ?? "Something went wrong.");
-            }
-
-            statusMessage.textContent =
-              data.message ??
-              "Thanks for reaching out. We will follow up with next steps soon.";
-            statusMessage.className = "text-sm leading-7 text-emerald-700";
-            form.reset();
-          } catch (error) {
-            const message =
-              error instanceof Error ? error.message : "Unexpected error occurred.";
-            statusMessage.textContent = message;
-            statusMessage.className = "text-sm leading-7 text-red-600";
-          } finally {
-            submitButton.removeAttribute("disabled");
-            submitButton.textContent = "Send project brief";
-          }
+      mobileNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileNav.classList.add("hidden");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Open menu");
         });
-      }
-    </script>
-  </body>
-</html>
+      });
+    }
+
+    if (form instanceof HTMLFormElement && submitButton instanceof HTMLButtonElement && statusMessage) {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const payload = {
+          name: String(formData.get("name") ?? "").trim(),
+          email: String(formData.get("email") ?? "").trim(),
+          company: String(formData.get("company") ?? "").trim(),
+          package: String(formData.get("package") ?? "").trim(),
+          projectDetails: String(formData.get("projectDetails") ?? "").trim(),
+        };
+
+        statusMessage.textContent = "Sending…";
+        statusMessage.className = "text-sm leading-6 text-cream/70";
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending…";
+
+        try {
+          const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.message ?? "Something went wrong.");
+          statusMessage.textContent = data.message ?? "Thanks — we’ll follow up shortly.";
+          statusMessage.className = "text-sm leading-6 text-accent";
+          form.reset();
+        } catch (error) {
+          statusMessage.textContent =
+            error instanceof Error ? error.message : "Unexpected error occurred.";
+          statusMessage.className = "text-sm leading-6 text-red-400";
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Send message";
+        }
+      });
+    }
+  </script>
+</Base>

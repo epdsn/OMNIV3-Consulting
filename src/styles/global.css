@@ -28,6 +28,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
   background: var(--color-ink);
   color: var(--color-cream);
   font-family: var(--font-sans);

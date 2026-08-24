@@ -1,0 +1,275 @@
+---
+import "../styles/global.css";
+
+const services = [
+  {
+    title: "Business Website Design",
+    description:
+      "Conversion-focused website design with modern UX patterns, mobile-first layouts, and clear brand messaging.",
+  },
+  {
+    title: "Custom Web Development",
+    description:
+      "End-to-end implementation using scalable front-end architecture and clean APIs, with strong .NET integration options.",
+  },
+  {
+    title: "Performance and SEO Optimization",
+    description:
+      "Core Web Vitals tuning, semantic markup, technical SEO, and analytics foundations to support long-term growth.",
+  },
+  {
+    title: "Ongoing Technical Partnership",
+    description:
+      "Roadmapping, maintenance, and incremental releases so your site keeps improving as your business evolves.",
+  },
+];
+
+const process = [
+  {
+    phase: "01. Discovery",
+    detail:
+      "Clarify goals, audience, offer positioning, and technical requirements before writing implementation plans.",
+  },
+  {
+    phase: "02. Design and Content",
+    detail:
+      "Create wireframes and polished UI direction with real business copy, then validate messaging against buyer intent.",
+  },
+  {
+    phase: "03. Build and Integrate",
+    detail:
+      "Develop the site with production-quality code, connect forms and analytics, and prepare deployment pipelines.",
+  },
+  {
+    phase: "04. Launch and Iterate",
+    detail:
+      "Ship to cloud infrastructure, monitor outcomes, and improve based on conversion data and customer feedback.",
+  },
+];
+
+const outcomes = [
+  "20+ years in .NET and front-end engineering",
+  "Production-ready delivery with modern tooling",
+  "Clear path to deploy on AWS or Azure",
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="description"
+      content="OMNIV3 Consulting builds high-performing websites through modern web development and web design."
+    />
+    <title>OMNIV3 Consulting</title>
+  </head>
+  <body>
+    <main class="min-h-screen bg-slate-50 text-slate-900">
+      <div class="mx-auto flex w-full max-w-6xl flex-col px-6 py-12 md:px-10 md:py-16">
+        <header class="mb-16 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-12">
+          <div class="mb-6 flex flex-wrap gap-3">
+            <span class="rounded-full bg-slate-900 px-4 py-1.5 text-xs font-semibold tracking-wide text-white">
+              OMNIV3 Consulting
+            </span>
+            <span class="rounded-full bg-slate-100 px-4 py-1.5 text-xs font-semibold tracking-wide text-slate-700">
+              Web Design
+            </span>
+            <span class="rounded-full bg-slate-100 px-4 py-1.5 text-xs font-semibold tracking-wide text-slate-700">
+              Web Development
+            </span>
+            <span class="rounded-full bg-slate-100 px-4 py-1.5 text-xs font-semibold tracking-wide text-slate-700">
+              .NET Expertise
+            </span>
+          </div>
+
+          <h1 class="mb-4 max-w-3xl text-4xl font-semibold tracking-tight md:text-5xl">
+            OMNIV3 Consulting builds high-performing websites that help businesses stand out, earn trust, and generate qualified leads.
+          </h1>
+          <p class="max-w-3xl text-lg leading-8 text-slate-600">
+            Backed by 20+ years of engineering experience in .NET and front-end development, OMNIV3 Consulting delivers modern web design and custom development with business results in mind.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a
+              href="#contact"
+              class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700"
+            >
+              Book a strategy call
+            </a>
+            <a
+              href="#services"
+              class="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-100"
+            >
+              Explore services
+            </a>
+          </div>
+        </header>
+
+        <section id="services" class="mb-14">
+          <div class="mb-6">
+            <h2 class="text-2xl font-semibold md:text-3xl">Services designed for growth</h2>
+            <p class="mt-2 max-w-3xl text-slate-600">
+              Position your company as a technical partner that can design, build, and scale business-critical websites.
+            </p>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            {
+              services.map((service) => (
+                <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 class="text-xl font-semibold text-slate-900">{service.title}</h3>
+                  <p class="mt-2 text-base leading-7 text-slate-600">{service.description}</p>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mb-14 rounded-2xl border border-slate-200 bg-white p-6 md:p-8">
+          <h2 class="text-2xl font-semibold md:text-3xl">Why clients choose OMNIV3 Consulting</h2>
+          <div class="my-6 h-px w-full bg-slate-200"></div>
+          <div class="grid gap-4 md:grid-cols-3">
+            {
+              outcomes.map((item) => (
+                <article class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                  <p class="text-sm leading-7 text-slate-700 md:text-base">{item}</p>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="mb-14">
+          <h2 class="mb-6 text-2xl font-semibold md:text-3xl">Delivery process</h2>
+          <div class="grid gap-4 md:grid-cols-2">
+            {
+              process.map((step) => (
+                <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                  <h3 class="text-lg font-semibold text-slate-900">{step.phase}</h3>
+                  <p class="mt-2 text-base leading-7 text-slate-600">{step.detail}</p>
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+        <section id="contact" class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:p-10">
+          <h2 class="text-2xl font-semibold md:text-3xl">Start your first client-ready website now</h2>
+          <p class="mt-2 max-w-3xl text-slate-600">
+            Send your business goals and project scope. The contact flow is already wired so you can demonstrate a working lead pipeline from day one.
+          </p>
+
+          <div class="mt-8 grid gap-8 md:grid-cols-[2fr_1fr]">
+            <form id="contact-form" class="space-y-4">
+              <div class="grid gap-4 sm:grid-cols-2">
+                <input
+                  required
+                  name="name"
+                  type="text"
+                  placeholder="Your name"
+                  class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"
+                />
+                <input
+                  required
+                  name="email"
+                  type="email"
+                  placeholder="Email address"
+                  class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"
+                />
+              </div>
+              <input
+                name="company"
+                type="text"
+                placeholder="Company name (optional)"
+                class="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"
+              />
+              <textarea
+                required
+                name="projectDetails"
+                minlength="30"
+                placeholder="Project goals, target audience, and timeline (minimum 30 characters)"
+                class="min-h-32 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-0 transition focus:border-slate-900"
+              ></textarea>
+              <button
+                id="contact-submit"
+                type="submit"
+                class="inline-flex items-center justify-center rounded-lg bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                Send project brief
+              </button>
+            </form>
+
+            <aside class="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+              <p class="mb-2 text-sm font-medium uppercase tracking-wide text-slate-500">Submission status</p>
+              <p id="form-status" class="text-sm leading-7 text-slate-600">
+                Tell us about your project and timeline to receive a scoped recommendation.
+              </p>
+              <p id="form-empty-hint" class="mt-4 text-xs text-slate-500">
+                Empty state: submit your first inquiry to test the full flow.
+              </p>
+            </aside>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script is:inline>
+      const form = document.querySelector("#contact-form");
+      const submitButton = document.querySelector("#contact-submit");
+      const statusMessage = document.querySelector("#form-status");
+      const emptyHint = document.querySelector("#form-empty-hint");
+
+      if (form && submitButton && statusMessage && emptyHint) {
+        form.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const formData = new FormData(form);
+          const payload = {
+            name: String(formData.get("name") ?? "").trim(),
+            email: String(formData.get("email") ?? "").trim(),
+            company: String(formData.get("company") ?? "").trim(),
+            projectDetails: String(formData.get("projectDetails") ?? "").trim(),
+          };
+
+          statusMessage.textContent = "Sending your project details...";
+          statusMessage.className = "text-sm leading-7 text-slate-600";
+          emptyHint.classList.add("hidden");
+          submitButton.setAttribute("disabled", "true");
+          submitButton.textContent = "Sending...";
+
+          try {
+            const response = await fetch("/api/contact", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payload),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+              throw new Error(data.message ?? "Something went wrong.");
+            }
+
+            statusMessage.textContent =
+              data.message ??
+              "Thanks for reaching out. We will follow up with next steps soon.";
+            statusMessage.className = "text-sm leading-7 text-emerald-700";
+            form.reset();
+          } catch (error) {
+            const message =
+              error instanceof Error ? error.message : "Unexpected error occurred.";
+            statusMessage.textContent = message;
+            statusMessage.className = "text-sm leading-7 text-red-600";
+          } finally {
+            submitButton.removeAttribute("disabled");
+            submitButton.textContent = "Send project brief";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

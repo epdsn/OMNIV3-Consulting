@@ -1,0 +1,137 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Transform": "AWS::Serverless-2016-10-31",
+  "Description": "OmniR3 static-site contact backend; no website hosting resources.",
+  "Parameters": {
+    "AllowedOrigin": {
+      "Type": "String",
+      "AllowedPattern": "https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?",
+      "Description": "Exact OmniR3 HTTPS origin, without trailing slash. No wildcard.",
+      "Default": "https://omnir3.com"
+    },
+    "SesFromEmail": {
+      "Type": "String",
+      "AllowedPattern": "[^\\s@<>]+@[^\\s@<>]+\\.[^\\s@<>]+",
+      "Description": "SES verified sender in the stack region."
+    },
+    "ContactToEmail": {
+      "Type": "String",
+      "AllowedPattern": "[^\\s@<>]+@[^\\s@<>]+\\.[^\\s@<>]+",
+      "Description": "Fixed recipient for inquiries."
+    },
+    "SesIdentity": {
+      "Type": "String",
+      "Description": "Verified SES identity (domain or email) authorizing SesFromEmail."
+    }
+  },
+  "Resources": {
+    "ContactApi": {
+      "Type": "AWS::Serverless::HttpApi",
+      "Properties": {
+        "StageName": "$default",
+        "CorsConfiguration": {
+          "AllowOrigins": [
+            {
+              "Ref": "AllowedOrigin"
+            }
+          ],
+          "AllowMethods": [
+            "POST"
+          ],
+          "AllowHeaders": [
+            "content-type"
+          ],
+          "MaxAge": 600
+        },
+        "DefaultRouteSettings": {
+          "ThrottlingBurstLimit": 5,
+          "ThrottlingRateLimit": 1
+        }
+      }
+    },
+    "ContactFunction": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "CodeUri": "../backend/contact/",
+        "Handler": "handler.handler",
+        "Runtime": "nodejs22.x",
+        "MemorySize": 128,
+        "Timeout": 10,
+        "ReservedConcurrentExecutions": 2,
+        "Environment": {
+          "Variables": {
+            "ALLOWED_ORIGIN": {
+              "Ref": "AllowedOrigin"
+            },
+            "SES_FROM_EMAIL": {
+              "Ref": "SesFromEmail"
+            },
+            "CONTACT_TO_EMAIL": {
+              "Ref": "ContactToEmail"
+            }
+          }
+        },
+        "Policies": [
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Effect": "Allow",
+                "Action": [
+                  "ses:SendEmail"
+                ],
+                "Resource": {
+                  "Fn::Sub": "arn:${AWS::Partition}:ses:${AWS::Region}:${AWS::AccountId}:identity/${SesIdentity}"
+                },
+                "Condition": {
+                  "StringEquals": {
+                    "ses:FromAddress": {
+                      "Ref": "SesFromEmail"
+                    }
+                  },
+                  "ForAllValues:StringEquals": {
+                    "ses:Recipients": [
+                      {
+                        "Ref": "ContactToEmail"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "Events": {
+          "Contact": {
+            "Type": "HttpApi",
+            "Properties": {
+              "ApiId": {
+                "Ref": "ContactApi"
+              },
+              "Path": "/contact",
+              "Method": "POST",
+              "PayloadFormatVersion": "2.0"
+            }
+          }
+        }
+      }
+    },
+    "ContactLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": "/aws/lambda/${ContactFunction}"
+        },
+        "RetentionInDays": 14
+      }
+    }
+  },
+  "Outputs": {
+    "ContactApiUrl": {
+      "Description": "Set PUBLIC_CONTACT_API_URL to this value and rebuild the static site.",
+      "Value": {
+        "Fn::Sub": "https://${ContactApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/contact"
+      }
+    }
+  }
+}

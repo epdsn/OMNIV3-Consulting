@@ -535,20 +535,23 @@ const outcomes = [
           </dl>
         </div>
 
-        <form id="contact-form" class="rounded-3xl border border-white/10 bg-ink-2 p-6 md:p-8">
+        <form data-contact-url={import.meta.env.PUBLIC_CONTACT_API_URL ?? ""} id="contact-form" class="rounded-3xl border border-white/10 bg-ink-2 p-6 md:p-8">
+          <div hidden aria-hidden="true">
+            <label>Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label>
+          </div>
           <div class="grid gap-4 sm:grid-cols-2">
             <label class="block text-sm">
               <span class="mb-2 block text-cream/70">Name</span>
-              <input class="field" required name="name" type="text" autocomplete="name" placeholder="Alex Rivera" />
+              <input class="field" required maxlength="100" name="name" type="text" autocomplete="name" placeholder="Alex Rivera" />
             </label>
             <label class="block text-sm">
               <span class="mb-2 block text-cream/70">Email</span>
-              <input class="field" required name="email" type="email" autocomplete="email" placeholder="you@company.com" />
+              <input class="field" required maxlength="254" name="email" type="email" autocomplete="email" placeholder="you@company.com" />
             </label>
           </div>
           <label class="mt-4 block text-sm">
             <span class="mb-2 block text-cream/70">Company</span>
-            <input class="field" name="company" type="text" autocomplete="organization" placeholder="Optional" />
+            <input class="field" name="company" maxlength="200" type="text" autocomplete="organization" placeholder="Optional" />
           </label>
           <label class="mt-4 block text-sm">
             <span class="mb-2 block text-cream/70">Package</span>
@@ -566,6 +569,7 @@ const outcomes = [
               required
               name="projectDetails"
               minlength="30"
+              maxlength="5000"
               placeholder="What you sell, who it’s for, and when you want to be live (30+ characters)."
             ></textarea>
           </label>
@@ -577,7 +581,7 @@ const outcomes = [
             >
               Send message
             </button>
-            <p id="form-status" class="text-sm leading-6 text-cream/50">
+            <p id="form-status" role="status" aria-live="polite" class="text-sm leading-6 text-cream/50">
               We’ll use this to scope the right build. No obligation.
             </p>
           </div>
@@ -685,10 +689,17 @@ const outcomes = [
     }
 
     if (form instanceof HTMLFormElement && submitButton instanceof HTMLButtonElement && statusMessage) {
+      const endpoint = form.dataset.contactUrl;
+      if (!endpoint) {
+        submitButton.disabled = true;
+        statusMessage.textContent = "Contact form is temporarily unavailable. Please check back soon.";
+      }
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
+        if (!endpoint || submitButton.disabled) return;
         const formData = new FormData(form);
         const payload = {
+          website: String(formData.get("website") ?? ""),
           name: String(formData.get("name") ?? "").trim(),
           email: String(formData.get("email") ?? "").trim(),
           company: String(formData.get("company") ?? "").trim(),
@@ -702,7 +713,8 @@ const outcomes = [
         submitButton.textContent = "Sending…";
 
         try {
-          const response = await fetch("/api/contact", {
+          const response = await fetch(endpoint, {
+            signal: AbortSignal.timeout(15000),
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),

@@ -12,16 +12,19 @@
     "SesFromEmail": {
       "Type": "String",
       "AllowedPattern": "[^\\s@<>]+@[^\\s@<>]+\\.[^\\s@<>]+",
-      "Description": "SES verified sender in the stack region."
+      "Description": "SES verified sender in the stack region.",
+      "Default": "info@omnir3.com"
     },
     "ContactToEmail": {
       "Type": "String",
       "AllowedPattern": "[^\\s@<>]+@[^\\s@<>]+\\.[^\\s@<>]+",
-      "Description": "Fixed recipient for inquiries."
+      "Description": "Fixed recipient for inquiries.",
+      "Default": "epdevio23@gmail.com"
     },
     "SesIdentity": {
       "Type": "String",
-      "Description": "Verified SES identity (domain or email) authorizing SesFromEmail."
+      "Description": "Verified SES identity (domain or email) authorizing SesFromEmail.",
+      "Default": "omnir3.com"
     }
   },
   "Resources": {

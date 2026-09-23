@@ -30,9 +30,11 @@ message. Never put AWS credentials in a `PUBLIC_` variable.
 
 - `AllowedOrigin`: defaults to `https://omnir3.com`, the canonical production origin.
   Use no trailing slash. All other origins, including `www`, are denied.
-- `SesFromEmail`: verified sender email address.
-- `ContactToEmail`: fixed destination inbox; visitors cannot choose recipients.
-- `SesIdentity`: verified SES identity (domain or address) authorizing the sender.
+- `SesFromEmail`: defaults to `info@omnir3.com`. The sender must be authorized by
+  the verified SES identity.
+- `ContactToEmail`: defaults to `epdevio23@gmail.com`; visitors cannot choose recipients.
+- `SesIdentity`: defaults to `omnir3.com`, to be verified through SES DNS records
+  at GoDaddy. This does not create an email mailbox.
 
 SAM maps those parameters to `ALLOWED_ORIGIN`, `SES_FROM_EMAIL`, and
 `CONTACT_TO_EMAIL` Lambda environment variables. `AWS_REGION` and temporary IAM
@@ -48,7 +50,8 @@ sam build --template-file infra/template.json
 ```
 
 After review and explicit deployment approval, an operator can deploy the SAM
-build with the origin and three required SES parameters, then copy `ContactApiUrl` into Amplify's
+build with the reviewed parameter defaults (or explicit overrides), then copy
+`ContactApiUrl` into Amplify's
 `PUBLIC_CONTACT_API_URL` environment variable. No AWS resources are created by
 `npm ci`, `npm test`, or `npm run build`.
 
@@ -113,8 +116,9 @@ Read-only checks on September 23, 2026 in `us-west-1` found:
 - SES sending is enabled, but production access is disabled and no SES email or
   domain identities are configured in this region.
 
-Before a production merge, finish SES identity/DNS verification, select the sender
-and destination inbox, deploy the reviewed backend, configure the API URL in
+Before a production merge, finish SES identity/DNS verification for `omnir3.com`
+and recipient verification for `epdevio23@gmail.com` while in the sandbox, deploy
+the reviewed backend, configure the API URL in
 Amplify, and connect `omnir3.com`. In the SES sandbox the recipient must also be
 verified; request production access if an unverified recipient is needed. Verify
 preflight and a real form submission after deployment. These steps have not been

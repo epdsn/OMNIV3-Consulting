@@ -7,7 +7,7 @@
       "Type": "String",
       "AllowedPattern": "https://[a-zA-Z0-9]([a-zA-Z0-9.-]*[a-zA-Z0-9])?",
       "Description": "Exact OmniR3 HTTPS origin, without trailing slash. No wildcard.",
-      "Default": "https://omnir3.com"
+      "Default": "https://www.omnir3.com"
     },
     "SesFromEmail": {
       "Type": "String",

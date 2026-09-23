@@ -28,8 +28,8 @@ message. Never put AWS credentials in a `PUBLIC_` variable.
 
 `infra/template.json` is an AWS SAM template. Parameters:
 
-- `AllowedOrigin`: defaults to `https://omnir3.com`, the canonical production origin.
-  Use no trailing slash. All other origins, including `www`, are denied.
+- `AllowedOrigin`: defaults to `https://www.omnir3.com`, the canonical production origin.
+  Use no trailing slash. All other origins are denied.
 - `SesFromEmail`: defaults to `info@omnir3.com`. The sender must be authorized by
   the verified SES identity.
 - `ContactToEmail`: defaults to `epdevio23@gmail.com`; visitors cannot choose recipients.
@@ -63,7 +63,8 @@ After approval, connect the intended repository branch to Amplify, configure the
 API URL, and add the custom domain in Amplify. Keep GoDaddy as the registrar and
 add the exact DNS verification and routing records Amplify supplies there.
 
-Use `omnir3.com` as the canonical hostname and redirect `www.omnir3.com` to it. Set
+Use `www.omnir3.com` as the canonical hostname and forward `omnir3.com` to
+`https://www.omnir3.com` through GoDaddy. Set
 `AllowedOrigin` to that canonical origin. Amplify preview domains and localhost
 are deliberately not allowed by the production API. For end-to-end local UI
 checks, use a local mock API; backend handler tests cover request processing.
@@ -126,3 +127,14 @@ verified; request production access if an unverified recipient is needed. Verify
 preflight and a real form submission after deployment. These steps have not been
 performed; no AWS settings were changed during the checks. If merging code before
 this setup, first explicitly disable automatic deployment in Amplify.
+
+
+### Deployment update
+
+The backend stack `omnir3-contact` is deployed in `us-west-1`; SES domain DKIM
+verification succeeded. Amplify's `main` branch now has `PUBLIC_CONTACT_API_URL`
+configured. The selected canonical website origin is `https://www.omnir3.com`,
+with DNS remaining at GoDaddy. Website certificate verification, the `www` CNAME,
+and root-domain forwarding must be completed in GoDaddy. Earlier readiness notes
+above describe the pre-deployment state. No real contact email has been sent as
+part of verification.

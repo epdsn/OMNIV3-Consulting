@@ -60,7 +60,6 @@
         "Runtime": "nodejs22.x",
         "MemorySize": 128,
         "Timeout": 10,
-        "ReservedConcurrentExecutions": 2,
         "Environment": {
           "Variables": {
             "ALLOWED_ORIGIN": {

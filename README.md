@@ -80,7 +80,9 @@ Provider failures return a generic error; logs omit message content and addresse
 API Gateway handles CORS preflight for the exact origin, POST, and Content-Type.
 The Lambda independently checks Origin. The hidden honeypot silently discards
 filled submissions. API Gateway throttles to 1 request/second with a burst of 5;
-Lambda concurrency is capped at 2 and logs expire after 14 days. IAM permits only
+Lambda uses the account concurrency pool and logs expire after 14 days.
+The current account quota is 10, so a reserved concurrency allocation is not
+configured; API Gateway throttling remains enabled. IAM permits only
 SES SendEmail for the configured identity, sender, and recipient.
 
 CORS is a browser policy, not authentication: bots can forge Origin and bypass a

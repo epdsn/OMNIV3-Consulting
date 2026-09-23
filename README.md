@@ -91,13 +91,32 @@ and [AWS SAM HTTP API](https://docs.aws.amazon.com/serverless-application-model/
 
 ## Review verification
 
-Verified locally on Node 22.23.2: root and backend `npm ci`, all eight handler
+Verified locally on Node 22.23.2: root and backend `npm ci`, handler and infrastructure parameter
 tests, `npm run build` with and without an API URL, and `cfn-lint` against the SAM
 template. The configured URL appears in the generated page; no `dist/server` or
 Astro API endpoint remains. AWS deployment, SES delivery, DNS changes and Amplify
 publishing have not been performed.
 
-The existing Astro dependency tree still reports npm audit advisories, including
-Astro/AVIF and transitive sharp/js-yaml findings. Dependency security upgrades
-remain a follow-up before production; this branch does not claim a clean audit.
-The separate Lambda dependency install reported no vulnerabilities.
+The dependency lockfile now resolves Astro 7.2.8, sharp 0.35.4, and js-yaml 4.3.2.
+Fresh `npm ci` and `npm audit` runs for both the website and Lambda reported zero
+known vulnerabilities on September 23, 2026. Astro's minimum dependency version
+is raised to 7.2.8, the [patched AVIF release](https://github.com/advisories/GHSA-26w7-cxv4-gfx2).
+
+### AWS readiness observed before merge
+
+Read-only checks on September 23, 2026 in `us-west-1` found:
+
+- Amplify app `OMNIV3-Consulting` has automatic builds enabled for production
+  branch `main`. Merging to that remote branch can immediately publish the site.
+- Neither the app nor `main` has `PUBLIC_CONTACT_API_URL` configured.
+- The app has no custom domain association yet.
+- SES sending is enabled, but production access is disabled and no SES email or
+  domain identities are configured in this region.
+
+Before a production merge, finish SES identity/DNS verification, select the sender
+and destination inbox, deploy the reviewed backend, configure the API URL in
+Amplify, and connect `omnir3.com`. In the SES sandbox the recipient must also be
+verified; request production access if an unverified recipient is needed. Verify
+preflight and a real form submission after deployment. These steps have not been
+performed; no AWS settings were changed during the checks. If merging code before
+this setup, first explicitly disable automatic deployment in Amplify.
